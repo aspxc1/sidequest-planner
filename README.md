@@ -53,4 +53,4 @@ Node's built-in test runner verifies templates, schema validation, backup roundt
 - `src/app.js`, `src/style.css`, `src/shell.html`: application UI.
 - `scripts/`: dependency-free build and server.
 
-The Git repository is local. No remote or hosted Site was created, following the local-only preference.
+Source is backed up in the private [GitHub repository](https://github.com/aspxc1/sidequest-planner). The app and all project records remain local; no hosted Site or cloud database is required.
