@@ -1,0 +1,13 @@
+{
+  "name": "sidequest-local",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Local-first engineering project planner",
+  "scripts": {
+    "test": "node --test",
+    "build": "node scripts/build.mjs",
+    "start": "node scripts/serve.mjs",
+    "dev": "node scripts/serve.mjs"
+  }
+}
