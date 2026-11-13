@@ -33,7 +33,7 @@ const kindBadge=k=>badge(kindLabel[k],k);
 const btn=(label,action,cls='',ico='',attrs='')=>`<button class="btn ${cls}" data-action="${action}" ${attrs}>${ico?icon(ico):''}${E(label)}</button>`;
 const editBtn=(type,id)=>`<button class="icon-btn" data-action="edit-record" data-type="${type}" data-id="${E(id)}" aria-label="Edit ${E(type)}">${icon('edit')}</button>`;
 const link=(label,view)=>`<button class="text-btn" data-nav="${view}">${E(label)} ${icon('arrow')}</button>`;
-const dateLabel=(date)=>{if(!date)return 'No date set';const d=new Date(`${date}T12:00:00`);return Number.isNaN(d.getTime())?date:d.toLocaleDateString('en',{month:'short',day:'numeric'});};
+const dateLabel=(date)=>{if(!date)return 'No date set';const d=new Date(`${date}T12:00:00`);return E(Number.isNaN(d.getTime())?date:d.toLocaleDateString('en',{month:'short',day:'numeric'}));};
 let store, workspace, storageIssue='', corruptRaw='', blockSave=false;
 try { store=createStore(localStorage); workspace=store.load(); if(!workspace){workspace=exampleWorkspace();store.save(workspace);} }
 catch(error){ workspace=exampleWorkspace();storageIssue=`Local storage needs attention. ${error.message} Export your work before closing this tab.`;blockSave=true;try{corruptRaw=localStorage.getItem(STORAGE_KEY)||'';}catch{} }
@@ -49,6 +49,7 @@ function persist(message='Saved locally'){
 function nav(view){route=view;query='';menuOpen=false;location.hash=view;render();window.scrollTo(0,0);document.querySelector('#main').focus({preventScroll:true});}
 function render(){
   const p=project();
+  const active=document.activeElement,focus=active&&document.querySelector('#app').contains(active)?{tag:active.tagName,attrs:Object.fromEntries(['id','data-id','data-action','data-nav','data-type','data-tab','data-check','data-status','data-milestone'].map(k=>[k,active.getAttribute(k)]))}:null;
   document.title=`${labels[route]} · ${p.title} — Sidequest`;
   document.querySelector('#app').innerHTML=`<div class="shell ${menuOpen?'menu-open':''}">
   <button class="drawer-backdrop" data-action="menu" aria-label="Close navigation"></button>
@@ -63,6 +64,7 @@ function render(){
   <div class="workspace"><header class="topbar"><button class="icon-btn mobile-menu" data-action="menu" aria-label="Open navigation" aria-expanded="${menuOpen}">${icon('menu')}</button><div class="breadcrumb"><span class="project-crumb">${E(p.title)}</span><span class="crumb-slash">/</span><span class="current">${labels[route]}</span></div><div class="top-actions"><label class="searchbox">${icon('search')}<input id="search" type="search" placeholder="Search your workspace" aria-label="Search your workspace" value="${E(query)}"><span class="key">Ctrl K</span></label><span class="save-state">${icon(storageIssue?'alert':'check')}${storageIssue?'Unsaved changes':'Saved locally'}</span>${btn('Backup','backup','','download')}</div></header>
   ${storageIssue?`<div class="storage-error" role="alert">${icon('alert')}<span>${E(storageIssue)}</span>${btn('Export backup','export','','download')}</div>`:''}
   <main class="main" id="main" tabindex="-1">${content()}</main></div></div>`;
+  if(focus){const replacement=[...document.querySelectorAll('#app button,#app input,#app select,#main')].find(el=>el.tagName===focus.tag&&Object.entries(focus.attrs).every(([k,v])=>el.getAttribute(k)===v));(replacement||document.querySelector('#main')).focus({preventScroll:true});}
 }
 function heading(title,description,actions=''){return `<div class="page-heading"><div><h1>${E(title)}</h1>${description?`<p>${E(description)}</p>`:''}</div>${actions?`<div class="heading-actions">${actions}</div>`:''}</div>`;}
 function empty(title,description,action=''){return `<div class="empty"><h3>${E(title)}</h3><p>${E(description)}</p>${action}</div>`;}
@@ -149,6 +151,9 @@ function saveRecord(event){
   const data=Object.fromEntries(new FormData(event.target).entries());Object.keys(data).forEach(k=>data[k]=data[k].trim());
   if(['title','name','path','group','decision','body'].some(k=>Object.hasOwn(data,k)&&['title','name','path','group'].includes(k)&&!data[k])){formError('Add a name before saving.');return;}
   const p=project();
+  if(c.type==='project'&&workspace.projects.length>=2000){formError('This workspace supports 2,000 projects. Export a backup before removing old records.');return;}
+  if(c.type==='brief'&&['in','out','success'].some(key=>lines(data[key]).length>2000||lines(data[key]).some(line=>line.length>1000))){formError('Each scope section supports up to 2,000 lines, with 1,000 characters per line. Shorten the scope before saving.');return;}
+  if(collections[c.type]&&!c.id&&collection(c.type).length>=2000){formError('This collection supports 2,000 records. Export a backup before removing old records.');return;}
   if(c.type==='project'){
     const newProject=createProject({title:data.title,template:data.template,category:data.category});workspace.projects.push(newProject);workspace.activeProject=newProject.id;route='overview';location.hash='overview';boardMilestone='all';
   }else if(c.type==='brief'){
@@ -162,7 +167,7 @@ function saveRecord(event){
   }
   closeDialog();persist(c.type==='project'?'Project created':'Changes saved');
 }
-function lines(s){return s.split('\n').map(v=>v.trim()).filter(Boolean).map(v=>v.slice(0,1000));}
+function lines(s){return s.split('\n').map(v=>v.trim()).filter(Boolean);}
 function formError(message){const el=document.querySelector('#form-error');el.hidden=false;el.textContent=message;el.scrollIntoView({block:'nearest'});}
 function confirmDelete(type,id){const r=type==='project'?project():collection(type).find(x=>x.id===id);const message=type==='project'?'This removes the project, its tasks and its technical records. Reusable workspace notes stay. Export a backup first if you want to keep a copy.':type==='milestone'?'Tasks will stay on the board without an assigned milestone.':'This record will be removed from your local workspace.';showDialog(`Delete ${r.title||r.name||r.path}?`,`<p class="brief-text">${E(message)}</p>`,btn('Cancel','close','quiet')+`<button type="submit" class="btn danger">Delete ${E(type)}</button>`,{type:'confirm-delete',recordType:type,id});}
 function performDelete(c){
@@ -175,9 +180,11 @@ function download(name,data,type='application/json'){
   const url=URL.createObjectURL(new Blob([data],{type}));const a=document.createElement('a');a.href=url;a.download=name;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),3000);
 }
 function exportWorkspace(){download(`sidequest-backup-${today()}.json`,JSON.stringify(workspace,null,2));toast('Backup exported');}
-function backupDialog(){showDialog('Your local workspace',`<p class="brief-text">${workspace.projects.length} project${workspace.projects.length===1?'':'s'} and ${workspace.notes.length} reusable notes are saved in this browser. Export a JSON backup to keep a copy you can restore anywhere.</p><div class="backup-actions">${btn('Export backup','export','primary','download')}${btn('Import backup','import','','upload')}${corruptRaw?btn('Download original data','export-original','','download'):''}</div><div class="backup-detail"><strong>Local means this browser and this address.</strong><p>Nothing is sent to a server. Clearing browser data or changing the app address can make this workspace unavailable. Import your backup to move between browsers or devices.</p><p style="margin-top:12px">For consistent storage, use the included local server at <code>http://localhost:4173</code>. The standalone HTML version also works offline; keep it in the same folder.</p></div>`,btn('Done','close','quiet'),{type:'backup'});}
+function backupDialog(){
+  showDialog('Your local workspace',`<p class="brief-text">${workspace.projects.length} project${workspace.projects.length===1?'':'s'} and ${workspace.notes.length} reusable notes are saved in this browser. Export a JSON backup to keep a copy you can restore anywhere.</p><div class="backup-actions">${btn('Export backup','export','primary','download')}${btn('Import backup','import','','upload')}${corruptRaw?btn('Download original data','export-original','','download'):''}</div><details class="paste-backup"><summary>Restore from pasted JSON</summary>${field('Backup JSON','backup-json','','textarea','class="code" placeholder="Paste the contents of a Sidequest backup"')}${btn('Check backup','import-paste','','check')}</details><div class="backup-detail"><strong>Local means this browser and this address.</strong><p>Nothing is sent to a server. Clearing browser data or changing the app address can make this workspace unavailable. Import your backup to move between browsers or devices.</p><p style="margin-top:12px">For consistent storage, use the included local server at <code>http://localhost:4173</code>. The standalone HTML version also works offline; keep it in the same folder.</p></div>`,btn('Done','close','quiet'),{type:'backup'});
+}
 async function readImport(file){
-  try{if(file.size>4*1024*1024)throw new Error('This file is too large. Choose a Sidequest JSON backup under 4 MB.');
+  try{
     const imported=validateWorkspace(JSON.parse(await file.text()));
     showDialog('Restore this workspace?',`<p class="brief-text">This backup contains ${imported.projects.length} project${imported.projects.length===1?'':'s'} and ${imported.notes.length} notes. Restoring replaces this workspace.</p><div class="notice" style="margin:20px 0 0">${icon('download')}<p>A backup of your current workspace will download before it is replaced.</p></div>`,btn('Cancel','close','quiet')+`<button type="submit" class="btn primary">Restore backup</button>`,{type:'confirm-import',workspace:imported});
   }catch(error){showDialog('Backup could not be opened',`<p class="brief-text">${E(error instanceof SyntaxError?'The file is not valid JSON. Choose a Sidequest backup.':error.message)}</p><p class="brief-text" style="margin-top:12px">Your current workspace has not changed.</p>`,btn('Choose another file','import','','upload')+btn('Close','close','quiet'));}
@@ -193,7 +200,7 @@ document.addEventListener('click',event=>{
   if(target.dataset.nav){nav(target.dataset.nav);return;}
   const {action,id,type}=target.dataset;
   if(action==='close'){closeDialog();return;}
-  if(action==='menu'){menuOpen=!menuOpen;render();return;}
+  if(action==='menu'){menuOpen=!menuOpen;render();document.querySelector(menuOpen?'.nav .active':'.mobile-menu')?.focus();return;}
   if(action==='open-board'){nav('board');return;}
   if(action==='new-project'){editor('project','',{template:target.dataset.template});return;}
   if(action==='edit-brief'){editor('brief');return;}
@@ -204,14 +211,14 @@ document.addEventListener('click',event=>{
   if(newTypes[action]){editor(newTypes[action],'',{status:target.dataset.status,milestone:target.dataset.milestone});return;}
   if(action==='toggle-task'){const t=project().tasks.find(t=>t.id===id);t.status=t.status==='done'?'todo':'done';persist(t.status==='done'?'Task complete':'Task reopened');return;}
   if(action==='choose-option'){
-    const p=project(),o=p.options.find(x=>x.id===id);p.options.forEach(x=>x.selected=x.id===id);
-    p.decisions.push({id:uid(),title:`Choose ${o.name}`,status:'accepted',date:today(),context:`Architecture comparison for ${p.title}.`,decision:`Use ${o.name}. ${o.style}`,consequences:o.tradeoffs||'Record the consequences of this approach.'});persist('Architecture selected. Decision recorded.');return;
+    try{selectArchitecture(project(),id);persist('Architecture selected. Decision recorded.');}catch(error){toast(error.message);}return;
   }
   if(action==='api-tab'){apiTab=target.dataset.tab;render();return;}
   if(action==='backup'){backupDialog();return;}
   if(action==='export'){exportWorkspace();return;}
   if(action==='export-original'){download(`sidequest-original-${today()}.txt`,corruptRaw,'text/plain');return;}
   if(action==='import'){document.querySelector('#import-file').click();return;}
+  if(action==='import-paste'){const text=document.querySelector('#f-backup-json').value;if(!text.trim()){formError('Paste a Sidequest JSON backup first.');return;}readImport(new Blob([text],{type:'application/json'}));return;}
   if(action==='search-result'){
     workspace.activeProject=target.dataset.project;route=target.dataset.view;apiTab=type==='entity'?'entities':'apis';query='';persist('');if(type&&id)editor(type,id);return;
   }
@@ -229,7 +236,7 @@ document.addEventListener('change',event=>{
   if(t.id==='import-file'&&t.files[0]){readImport(t.files[0]);t.value='';}
 });
 document.addEventListener('input',event=>{if(event.target.id==='search'){query=event.target.value;document.querySelector('#main').innerHTML=content();}});
-document.addEventListener('keydown',event=>{if((event.ctrlKey||event.metaKey)&&event.key.toLowerCase()==='k'){event.preventDefault();document.querySelector('#search').focus();}if(event.key==='Escape'&&!document.querySelector('#editor').open){if(query){query='';render();}else if(menuOpen){menuOpen=false;render();}}});
+document.addEventListener('keydown',event=>{if((event.ctrlKey||event.metaKey)&&event.key.toLowerCase()==='k'){event.preventDefault();document.querySelector('#search').focus();}if(event.key==='Escape'&&!document.querySelector('#editor').open){if(query){query='';render();}else if(menuOpen){menuOpen=false;render();document.querySelector('.mobile-menu')?.focus();}}});
 document.addEventListener('dragstart',event=>{const card=event.target.closest('[data-task]');if(card){dragId=card.dataset.task;event.dataTransfer.setData('text/plain',dragId);event.dataTransfer.effectAllowed='move';card.classList.add('dragging');}});
 document.addEventListener('dragend',()=>{dragId='';document.querySelectorAll('.dragging,.drag-over').forEach(el=>el.classList.remove('dragging','drag-over'));});
 document.addEventListener('dragover',event=>{const lane=event.target.closest('[data-lane]');if(lane&&dragId){event.preventDefault();lane.classList.add('drag-over');event.dataTransfer.dropEffect='move';}});

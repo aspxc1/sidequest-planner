@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { createProject, validateWorkspace, progress, makeWorkspace, templates } from '../src/core.mjs';
+import { createProject, validateWorkspace, progress, makeWorkspace, templates, selectArchitecture } from '../src/core.mjs';
 
 test('each idea creates an independent project with valid milestone references', () => {
   for (const idea of templates.filter(t => t.id !== 'blank')) {
@@ -47,4 +47,26 @@ test('blank title is rejected; extra prototype properties do not roundtrip', () 
   const result = validateWorkspace(JSON.parse(JSON.stringify(w).replace('"schemaVersion":1','"__proto__":{"polluted":true},"schemaVersion":1')));
   assert.equal(Object.hasOwn(result,'__proto__'),false);
   assert.equal({}.polluted,undefined);
+});
+test('selecting an approach with a maximum-length name keeps a reloadable decision', () => {
+  const p=createProject({title:'Long names',template:'blank'});
+  p.options.push({id:'long',name:'A'.repeat(300),style:'One process',stack:'JS',strengths:'Simple',tradeoffs:'Shared release',effort:'Small',selected:false});
+  selectArchitecture(p,'long');
+  assert.equal(p.options[0].selected,true);
+  assert.ok(p.decisions[0].title.length<=300);
+  assert.equal(validateWorkspace(makeWorkspace(p)).projects[0].decisions.length,1);
+});
+test('backup dates must be real calendar dates, not markup or malformed strings', () => {
+  const base=makeWorkspace(createProject({title:'Dates',template:'blank'}));
+  for(const date of ['<b>x</b>','2026-02-30','2026-13-01','Nov 13']){
+    const w=structuredClone(base);w.projects[0].milestones[0].due=date;
+    assert.throws(()=>validateWorkspace(w),/backup/i);
+  }
+});
+test('large Unicode backups roundtrip without a smaller import size ceiling', () => {
+  const w=makeWorkspace(createProject({title:'Unicode',template:'blank'}));
+  w.notes=Array.from({length:15},(_,i)=>({id:`note-${i}`,title:'Reusable note',category:'General',body:'项'.repeat(100000),updatedAt:'2026-11-13'}));
+  const text=JSON.stringify(w);
+  assert.ok(Buffer.byteLength(text,'utf8')>4*1024*1024);
+  assert.deepEqual(validateWorkspace(JSON.parse(text)),w);
 });

@@ -18,6 +18,13 @@ export function createProject({title, template = 'blank', category}) {
     options:[],components:[],apis:[],entities:[],deployment:[['Configuration','Environment variables documented'],['Quality','Automated checks pass'],['Release','Deployment steps are repeatable'],['Release','Rollback verified'],['Operations','Logs and health checks available']].map(([group,name]) => ({id:uid(),group,title:name,done:false})),decisions:[]};
 }
 export const makeWorkspace = project => ({schemaVersion:1,activeProject:project.id,projects:[project],notes:[]});
+export function selectArchitecture(p,id) {
+  const o=p.options.find(x=>x.id===id);
+  if(!o)throw new Error('Choose an existing architecture option.');
+  if(p.decisions.length>=2000)throw new Error('This project has reached its limit of 2,000 decisions. Export a backup before removing old records.');
+  p.options.forEach(x=>x.selected=x.id===id);
+  p.decisions.push({id:uid(),title:`Choose ${o.name}`.slice(0,300),status:'accepted',date:today(),context:`Architecture comparison for ${p.title}.`,decision:`Use ${o.name}. ${o.style}`,consequences:o.tradeoffs||'Record the consequences of this approach.'});
+}
 
 // Explicitly reconstruct records so unrecognized and prototype properties never enter app state.
 export function validateWorkspace(input) {
@@ -27,23 +34,24 @@ export function validateWorkspace(input) {
   const id = x => { str(x,100); if (!x) fail(); return x; };
   const bool = x => { if(typeof x !== 'boolean') fail(); return x; };
   const choice = (x,options) => { if(!options.includes(x)) fail(); return x; };
+  const date = (x,optional=false) => { str(x,10);if(optional&&x==='')return x;if(!/^\d{4}-\d{2}-\d{2}$/.test(x))fail();const parsed=new Date(`${x}T12:00:00Z`);if(Number.isNaN(parsed.getTime())||parsed.toISOString().slice(0,10)!==x)fail();return x; };
   const arr = (x,fn) => { if(!Array.isArray(x) || x.length>2000) fail(); return x.map(fn); };
   const records = (x,fn) => { const a = arr(x, r => fn(obj(r))); if(new Set(a.map(r=>r.id)).size!==a.length) fail(); return a; };
   obj(input); if(input.schemaVersion!==1) fail();
   const projects = records(input.projects, p => {
     const scope = obj(p.scope);
-    const milestones = records(p.milestones, m => ({id:id(m.id),title:str(m.title,300),description:str(m.description),due:str(m.due,10)}));
-    const tasks = records(p.tasks,t=>({id:id(t.id),title:str(t.title,300),description:str(t.description),status:choice(t.status,statuses),kind:choice(t.kind,kinds),priority:choice(t.priority,['low','medium','high']),milestone:str(t.milestone,100),due:str(t.due,10)}));
+    const milestones = records(p.milestones, m => ({id:id(m.id),title:str(m.title,300),description:str(m.description),due:date(m.due,true)}));
+    const tasks = records(p.tasks,t=>({id:id(t.id),title:str(t.title,300),description:str(t.description),status:choice(t.status,statuses),kind:choice(t.kind,kinds),priority:choice(t.priority,['low','medium','high']),milestone:str(t.milestone,100),due:date(t.due,true)}));
     if(tasks.some(t=>t.milestone && !milestones.some(m=>m.id===t.milestone))) fail();
-    return {id:id(p.id),title:str(p.title,300),category:choice(p.category,['Backend','AI / ML','DevOps']),summary:str(p.summary),goal:str(p.goal),status:choice(p.status,['planning','building','paused','shipped']),example:bool(p.example),createdAt:str(p.createdAt,10),updatedAt:str(p.updatedAt,10),
+    return {id:id(p.id),title:str(p.title,300),category:choice(p.category,['Backend','AI / ML','DevOps']),summary:str(p.summary),goal:str(p.goal),status:choice(p.status,['planning','building','paused','shipped']),example:bool(p.example),createdAt:date(p.createdAt),updatedAt:date(p.updatedAt),
       scope:{in:arr(scope.in,x=>str(x,1000)),out:arr(scope.out,x=>str(x,1000)),success:arr(scope.success,x=>str(x,1000))},milestones,tasks,
       options:records(p.options,o=>({id:id(o.id),name:str(o.name,300),style:str(o.style),stack:str(o.stack),strengths:str(o.strengths),tradeoffs:str(o.tradeoffs),effort:str(o.effort),selected:bool(o.selected)})),
       components:records(p.components,c=>({id:id(c.id),name:str(c.name,300),kind:choice(c.kind,kinds),description:str(c.description)})),
       apis:records(p.apis,a=>({id:id(a.id),method:choice(a.method,['GET','POST','PUT','PATCH','DELETE','EVENT']),path:str(a.path,1000),description:str(a.description),request:str(a.request),response:str(a.response)})),
       entities:records(p.entities,e=>({id:id(e.id),name:str(e.name,300),fields:str(e.fields),notes:str(e.notes)})),
       deployment:records(p.deployment,d=>({id:id(d.id),title:str(d.title,1000),group:str(d.group,100),done:bool(d.done)})),
-      decisions:records(p.decisions,d=>({id:id(d.id),title:str(d.title,300),status:choice(d.status,['proposed','accepted','superseded']),context:str(d.context),decision:str(d.decision),consequences:str(d.consequences),date:str(d.date,10)}))};
+      decisions:records(p.decisions,d=>({id:id(d.id),title:str(d.title,300),status:choice(d.status,['proposed','accepted','superseded']),context:str(d.context),decision:str(d.decision),consequences:str(d.consequences),date:date(d.date)}))};
   });
   if(!projects.length || !projects.some(p=>p.id===input.activeProject)) fail();
-  return {schemaVersion:1,activeProject:id(input.activeProject),projects,notes:records(input.notes,n=>({id:id(n.id),title:str(n.title,300),category:str(n.category,100),body:str(n.body),updatedAt:str(n.updatedAt,10)}))};
+  return {schemaVersion:1,activeProject:id(input.activeProject),projects,notes:records(input.notes,n=>({id:id(n.id),title:str(n.title,300),category:str(n.category,100),body:str(n.body),updatedAt:date(n.updatedAt)}))};
 }
