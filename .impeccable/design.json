@@ -1,0 +1,493 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-13T18:40:47.409840Z",
+  "title": "Design System: Sidequest",
+  "extensions": {
+    "colorMeta": {
+      "paper": {
+        "role": "neutral",
+        "displayName": "Notebook Paper",
+        "canonical": "#f5f6f3",
+        "tonalRamp": [
+          "oklch(15% 0.0012 121.6)",
+          "oklch(25% 0.0023 121.6)",
+          "oklch(37% 0.0033 121.6)",
+          "oklch(49% 0.0041 121.6)",
+          "oklch(61% 0.0041 121.6)",
+          "oklch(73% 0.0033 121.6)",
+          "oklch(85% 0.0020 121.6)",
+          "oklch(95% 0.0006 121.6)"
+        ]
+      },
+      "white": {
+        "role": "neutral",
+        "displayName": "Clean Sheet",
+        "canonical": "#fff",
+        "tonalRamp": [
+          "oklch(15% 0.0000 0.0)",
+          "oklch(25% 0.0000 0.0)",
+          "oklch(37% 0.0000 0.0)",
+          "oklch(49% 0.0000 0.0)",
+          "oklch(61% 0.0000 0.0)",
+          "oklch(73% 0.0000 0.0)",
+          "oklch(85% 0.0000 0.0)",
+          "oklch(95% 0.0000 0.0)"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Engineering Ink",
+        "canonical": "#202e2b",
+        "tonalRamp": [
+          "oklch(15% 0.0059 180.2)",
+          "oklch(25% 0.0108 180.2)",
+          "oklch(37% 0.0157 180.2)",
+          "oklch(49% 0.0197 180.2)",
+          "oklch(61% 0.0197 180.2)",
+          "oklch(73% 0.0157 180.2)",
+          "oklch(85% 0.0098 180.2)",
+          "oklch(95% 0.0030 180.2)"
+        ]
+      },
+      "muted": {
+        "role": "neutral",
+        "displayName": "Quiet Ink",
+        "canonical": "#62716b",
+        "tonalRamp": [
+          "oklch(15% 0.0061 169.5)",
+          "oklch(25% 0.0111 169.5)",
+          "oklch(37% 0.0162 169.5)",
+          "oklch(49% 0.0203 169.5)",
+          "oklch(61% 0.0203 169.5)",
+          "oklch(73% 0.0162 169.5)",
+          "oklch(85% 0.0101 169.5)",
+          "oklch(95% 0.0030 169.5)"
+        ]
+      },
+      "line": {
+        "role": "neutral",
+        "displayName": "Pencil Line",
+        "canonical": "#e2e7e1",
+        "tonalRamp": [
+          "oklch(15% 0.0029 140.5)",
+          "oklch(25% 0.0053 140.5)",
+          "oklch(37% 0.0077 140.5)",
+          "oklch(49% 0.0096 140.5)",
+          "oklch(61% 0.0096 140.5)",
+          "oklch(73% 0.0077 140.5)",
+          "oklch(85% 0.0048 140.5)",
+          "oklch(95% 0.0014 140.5)"
+        ]
+      },
+      "forest": {
+        "role": "neutral",
+        "displayName": "Forest Rail",
+        "canonical": "#172d29",
+        "tonalRamp": [
+          "oklch(15% 0.0088 181.1)",
+          "oklch(25% 0.0160 181.1)",
+          "oklch(37% 0.0233 181.1)",
+          "oklch(49% 0.0292 181.1)",
+          "oklch(61% 0.0292 181.1)",
+          "oklch(73% 0.0233 181.1)",
+          "oklch(85% 0.0146 181.1)",
+          "oklch(95% 0.0044 181.1)"
+        ]
+      },
+      "green": {
+        "role": "primary",
+        "displayName": "Working Green",
+        "canonical": "#236b54",
+        "tonalRamp": [
+          "oklch(15% 0.0242 168.2)",
+          "oklch(25% 0.0443 168.2)",
+          "oklch(37% 0.0645 168.2)",
+          "oklch(49% 0.0806 168.2)",
+          "oklch(61% 0.0806 168.2)",
+          "oklch(73% 0.0645 168.2)",
+          "oklch(85% 0.0403 168.2)",
+          "oklch(95% 0.0121 168.2)"
+        ]
+      },
+      "soft": {
+        "role": "primary",
+        "displayName": "Soft Sage",
+        "canonical": "#e6efe8",
+        "tonalRamp": [
+          "oklch(15% 0.0040 152.6)",
+          "oklch(25% 0.0073 152.6)",
+          "oklch(37% 0.0107 152.6)",
+          "oklch(49% 0.0133 152.6)",
+          "oklch(61% 0.0133 152.6)",
+          "oklch(73% 0.0107 152.6)",
+          "oklch(85% 0.0067 152.6)",
+          "oklch(95% 0.0020 152.6)"
+        ]
+      },
+      "software": {
+        "role": "secondary",
+        "displayName": "Software Slate",
+        "canonical": "#446873",
+        "tonalRamp": [
+          "oklch(15% 0.0134 219.0)",
+          "oklch(25% 0.0246 219.0)",
+          "oklch(37% 0.0357 219.0)",
+          "oklch(49% 0.0446 219.0)",
+          "oklch(61% 0.0446 219.0)",
+          "oklch(73% 0.0357 219.0)",
+          "oklch(85% 0.0223 219.0)",
+          "oklch(95% 0.0067 219.0)"
+        ]
+      },
+      "gpt": {
+        "role": "secondary",
+        "displayName": "API Clay",
+        "canonical": "#80563c",
+        "tonalRamp": [
+          "oklch(15% 0.0204 52.3)",
+          "oklch(25% 0.0374 52.3)",
+          "oklch(37% 0.0545 52.3)",
+          "oklch(49% 0.0681 52.3)",
+          "oklch(61% 0.0681 52.3)",
+          "oklch(73% 0.0545 52.3)",
+          "oklch(85% 0.0340 52.3)",
+          "oklch(95% 0.0102 52.3)"
+        ]
+      },
+      "warn": {
+        "role": "secondary",
+        "displayName": "Warning Ochre",
+        "canonical": "#9a5a28",
+        "tonalRamp": [
+          "oklch(15% 0.0317 55.7)",
+          "oklch(25% 0.0581 55.7)",
+          "oklch(37% 0.0846 55.7)",
+          "oklch(49% 0.1057 55.7)",
+          "oklch(61% 0.1057 55.7)",
+          "oklch(73% 0.0846 55.7)",
+          "oklch(85% 0.0528 55.7)",
+          "oklch(95% 0.0159 55.7)"
+        ]
+      },
+      "danger": {
+        "role": "secondary",
+        "displayName": "Error Brick",
+        "canonical": "#ac4039",
+        "tonalRamp": [
+          "oklch(15% 0.0430 26.9)",
+          "oklch(25% 0.0787 26.9)",
+          "oklch(37% 0.1145 26.9)",
+          "oklch(49% 0.1432 26.9)",
+          "oklch(61% 0.1432 26.9)",
+          "oklch(73% 0.1145 26.9)",
+          "oklch(85% 0.0716 26.9)",
+          "oklch(95% 0.0215 26.9)"
+        ]
+      },
+      "focus": {
+        "role": "primary",
+        "displayName": "Focus Fern",
+        "canonical": "#458a6c",
+        "tonalRamp": [
+          "oklch(15% 0.0255 163.4)",
+          "oklch(25% 0.0467 163.4)",
+          "oklch(37% 0.0680 163.4)",
+          "oklch(49% 0.0849 163.4)",
+          "oklch(61% 0.0849 163.4)",
+          "oklch(73% 0.0680 163.4)",
+          "oklch(85% 0.0425 163.4)",
+          "oklch(95% 0.0127 163.4)"
+        ]
+      },
+      "green-hover": {
+        "role": "primary",
+        "displayName": "Working Green Hover",
+        "canonical": "#19563f",
+        "tonalRamp": [
+          "oklch(15% 0.0220 164.2)",
+          "oklch(25% 0.0404 164.2)",
+          "oklch(37% 0.0588 164.2)",
+          "oklch(49% 0.0735 164.2)",
+          "oklch(61% 0.0735 164.2)",
+          "oklch(73% 0.0588 164.2)",
+          "oklch(85% 0.0367 164.2)",
+          "oklch(95% 0.0110 164.2)"
+        ]
+      },
+      "software-soft": {
+        "role": "secondary",
+        "displayName": "Software Slate Tint",
+        "canonical": "#edf2f4",
+        "tonalRamp": [
+          "oklch(15% 0.0018 223.5)",
+          "oklch(25% 0.0033 223.5)",
+          "oklch(37% 0.0048 223.5)",
+          "oklch(49% 0.0060 223.5)",
+          "oklch(61% 0.0060 223.5)",
+          "oklch(73% 0.0048 223.5)",
+          "oklch(85% 0.0030 223.5)",
+          "oklch(95% 0.0009 223.5)"
+        ]
+      },
+      "gpt-soft": {
+        "role": "secondary",
+        "displayName": "API Clay Tint",
+        "canonical": "#f5eae2",
+        "tonalRamp": [
+          "oklch(15% 0.0048 58.6)",
+          "oklch(25% 0.0088 58.6)",
+          "oklch(37% 0.0129 58.6)",
+          "oklch(49% 0.0161 58.6)",
+          "oklch(61% 0.0161 58.6)",
+          "oklch(73% 0.0129 58.6)",
+          "oklch(85% 0.0080 58.6)",
+          "oklch(95% 0.0024 58.6)"
+        ]
+      },
+      "mixed": {
+        "role": "secondary",
+        "displayName": "Mixed Mauve",
+        "canonical": "#705d84",
+        "tonalRamp": [
+          "oklch(15% 0.0193 306.5)",
+          "oklch(25% 0.0354 306.5)",
+          "oklch(37% 0.0515 306.5)",
+          "oklch(49% 0.0644 306.5)",
+          "oklch(61% 0.0644 306.5)",
+          "oklch(73% 0.0515 306.5)",
+          "oklch(85% 0.0322 306.5)",
+          "oklch(95% 0.0097 306.5)"
+        ]
+      },
+      "mixed-soft": {
+        "role": "secondary",
+        "displayName": "Mixed Mauve Tint",
+        "canonical": "#f0ecf5",
+        "tonalRamp": [
+          "oklch(15% 0.0038 306.0)",
+          "oklch(25% 0.0070 306.0)",
+          "oklch(37% 0.0102 306.0)",
+          "oklch(49% 0.0127 306.0)",
+          "oklch(61% 0.0127 306.0)",
+          "oklch(73% 0.0102 306.0)",
+          "oklch(85% 0.0063 306.0)",
+          "oklch(95% 0.0019 306.0)"
+        ]
+      },
+      "nav-selected": {
+        "role": "neutral",
+        "displayName": "Selected Leaf",
+        "canonical": "#dfede2",
+        "tonalRamp": [
+          "oklch(15% 0.0063 152.2)",
+          "oklch(25% 0.0115 152.2)",
+          "oklch(37% 0.0167 152.2)",
+          "oklch(49% 0.0209 152.2)",
+          "oklch(61% 0.0209 152.2)",
+          "oklch(73% 0.0167 152.2)",
+          "oklch(85% 0.0104 152.2)",
+          "oklch(95% 0.0031 152.2)"
+        ]
+      },
+      "nav-selected-ink": {
+        "role": "neutral",
+        "displayName": "Selected Leaf Ink",
+        "canonical": "#1f4836",
+        "tonalRamp": [
+          "oklch(15% 0.0169 162.8)",
+          "oklch(25% 0.0310 162.8)",
+          "oklch(37% 0.0450 162.8)",
+          "oklch(49% 0.0563 162.8)",
+          "oklch(61% 0.0563 162.8)",
+          "oklch(73% 0.0450 162.8)",
+          "oklch(85% 0.0281 162.8)",
+          "oklch(95% 0.0084 162.8)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Page Heading",
+        "purpose": "Main page headings; 28px on narrow screens."
+      },
+      "headline": {
+        "displayName": "Section Heading",
+        "purpose": "Section hierarchy, with compact 16px panel and 20px dialog variants."
+      },
+      "title": {
+        "displayName": "Record Title",
+        "purpose": "Records and notes; task and milestone variants tighten to 12–13px."
+      },
+      "body": {
+        "displayName": "Interface Body",
+        "purpose": "General interface copy and page introductions."
+      },
+      "compact": {
+        "displayName": "Compact Copy",
+        "purpose": "Dense panel details, task descriptions, and technical records."
+      },
+      "label": {
+        "displayName": "Section Label",
+        "purpose": "Small uppercase labels; not a blanket style for form labels."
+      },
+      "code": {
+        "displayName": "Technical Example",
+        "purpose": "API/data snippets with a local monospace stack and wrapping."
+      }
+    },
+    "shadows": [
+      {
+        "name": "dialog-lift",
+        "value": "0 24px 70px #15291b30",
+        "purpose": "The native modal floats above the flat workspace."
+      },
+      {
+        "name": "toast-lift",
+        "value": "0 5px 20px #17301c20",
+        "purpose": "Transient action feedback near the workspace bottom."
+      }
+    ],
+    "motion": [
+      {
+        "name": "progress-width",
+        "value": "width .2s ease",
+        "purpose": "Progress updates; removed for reduced motion."
+      },
+      {
+        "name": "drawer-slide",
+        "value": "transform .2s ease",
+        "purpose": "Mobile navigation drawer; removed for reduced motion."
+      },
+      {
+        "name": "toast-fade",
+        "value": "opacity .15s ease",
+        "purpose": "Transient feedback; removed for reduced motion."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "wide",
+        "value": "1500px"
+      },
+      {
+        "name": "compact-desktop",
+        "value": "1200px"
+      },
+      {
+        "name": "tablet",
+        "value": "1000px"
+      },
+      {
+        "name": "mobile",
+        "value": "760px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The main action for creating or advancing work; compact, sentence case, with an authored stroke icon.",
+      "html": "<button class=\"ds-primary\" type=\"button\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M12 5v14M5 12h14\"/></svg>Add task</button>",
+      "css": ".ds-primary{display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:36px;border:1px solid;border-radius:6px;padding:7px 12px;font-family:'Segoe UI',system-ui,-apple-system,sans-serif;font-weight:550;font-size:12px;line-height:1.5;white-space:nowrap;cursor:pointer;background:var(--green,#236b54);border-color:var(--green,#236b54);color:var(--white,#fff)}.ds-primary svg{width:18px;height:18px;flex-shrink:0}.ds-primary:hover{background:#19563f}.ds-primary:focus-visible{outline:3px solid var(--focus,#458a6c);outline-offset:3px;}.ds-primary:disabled{opacity:.5;cursor:not-allowed}"
+    },
+    {
+      "name": "Secondary Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "A supporting action such as editing the project brief; white fill and a fine border keep it quieter than the main action.",
+      "html": "<button class=\"ds-secondary\" type=\"button\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M14 5l5 5M4 20l5-1L21 7l-5-5L4 14z\"/></svg>Edit brief</button>",
+      "css": ".ds-secondary{display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:36px;border:1px solid;border-radius:6px;padding:7px 12px;font-family:'Segoe UI',system-ui,-apple-system,sans-serif;font-weight:550;font-size:12px;line-height:1.5;white-space:nowrap;cursor:pointer;background:var(--white,#fff);color:var(--ink,#202e2b);border-color:#d7dfd7}.ds-secondary svg{width:18px;height:18px;flex-shrink:0}.ds-secondary:hover{background:#f0f4ee;border-color:#b7c8ba}.ds-secondary:focus-visible{outline:3px solid var(--focus,#458a6c);outline-offset:3px;}.ds-secondary:disabled{opacity:.5;cursor:not-allowed}"
+    },
+    {
+      "name": "Labeled Text Field",
+      "kind": "input",
+      "refersTo": "input-field",
+      "description": "The standard editor field, with a visible sentence-case label, native input, and shared keyboard outline.",
+      "html": "<div class=\"ds-field\"><label for=\"ds-task-title\">Task title</label><input id=\"ds-task-title\" name=\"title\" type=\"text\" value=\"Add incident grouping rules\" placeholder=\"What needs to happen?\"></div>",
+      "css": ".ds-field{display:flex;flex-direction:column;gap:7px;width:min(100%,360px);font-family:'Segoe UI',system-ui,-apple-system,sans-serif;color:var(--ink,#202e2b)}.ds-field label{font-size:12px;font-weight:600;line-height:1.5}.ds-field input{width:100%;border:1px solid #cfd9cc;background:var(--white,#fff);border-radius:6px;padding:10px 11px;font-family:'Segoe UI',system-ui,-apple-system,sans-serif;font-size:13px;color:var(--ink,#202e2b);caret-color:var(--green,#236b54);outline-offset:3px}.ds-field input::placeholder{color:#66735f}.ds-field input:focus-visible{outline:3px solid var(--focus,#458a6c);outline-offset:3px;}"
+    },
+    {
+      "name": "Forest Navigation",
+      "kind": "nav",
+      "refersTo": "navigation-item",
+      "description": "The rail pattern pairs recognizable stroke icons with clear section labels; the active item has a pale leaf fill and stronger weight.",
+      "html": "<nav class=\"ds-nav\" aria-label=\"Project\"><div class=\"ds-nav-label\">PROJECT</div><button type=\"button\" class=\"ds-nav-item ds-nav-active\" aria-current=\"page\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M3 3h7v7H3zM14 3h7v7h-7zM3 14h7v7H3zM14 14h7v7h-7z\"/></svg><span>Overview</span></button><button type=\"button\" class=\"ds-nav-item\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M5 4v16M5 6h13l-3 4 3 4H5\"/></svg><span>Roadmap</span></button><button type=\"button\" class=\"ds-nav-item\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M3 4h18v16H3zM9 4v16M15 4v16M5 8h2M11 8h2M17 8h2M5 12h2M11 12h2\"/></svg><span>Task board</span><span class=\"ds-nav-count\">18</span></button></nav>",
+      "css": ".ds-nav{display:flex;flex-direction:column;gap:3px;width:202px;background:var(--forest,#172d29);padding:18px;font-family:'Segoe UI',system-ui,-apple-system,sans-serif}.ds-nav-label{margin:0 12px 9px;font-size:10px;font-weight:600;letter-spacing:.13em;color:#9aafa3;line-height:1.5}.ds-nav-item{border:0;background:none;color:#bbcec3;display:flex;align-items:center;gap:11px;padding:10px 13px;text-align:left;border-radius:6px;min-height:39px;font-family:'Segoe UI',system-ui,-apple-system,sans-serif;font-size:14px;line-height:1.5;cursor:pointer}.ds-nav-item svg{width:18px;height:18px;flex-shrink:0}.ds-nav-item:hover{background:#263f37;color:#fff}.ds-nav-item.ds-nav-active{background:#dfede2;color:#1f4836;font-weight:650}.ds-nav-item:focus-visible{outline:3px solid var(--focus,#458a6c);outline-offset:3px;}.ds-nav-count{margin-left:auto;font-size:11px;min-width:20px;text-align:center;opacity:.8}"
+    },
+    {
+      "name": "Implementation Kind Chips",
+      "kind": "chip",
+      "refersTo": "chip-software",
+      "description": "Static text labels distinguish deterministic software, GPT/API work, and mixed tasks. They convey category without implying an action.",
+      "html": "<div class=\"ds-chips\"><span class=\"ds-chip ds-chip-software\">Software</span><span class=\"ds-chip ds-chip-gpt\">GPT / API</span><span class=\"ds-chip ds-chip-mixed\">Mixed</span></div>",
+      "css": ".ds-chips{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-family:'Segoe UI',system-ui,-apple-system,sans-serif}.ds-chip{display:inline-flex;align-items:center;gap:5px;font-size:10px;font-weight:600;border-radius:4px;padding:3px 7px;line-height:1.3;white-space:nowrap}.ds-chip-software{color:var(--software,#446873);background:#edf2f4}.ds-chip-gpt{color:var(--gpt,#80563c);background:#f5eae2}.ds-chip-mixed{color:#705d84;background:#f0ecf5}"
+    },
+    {
+      "name": "Task Card",
+      "kind": "card",
+      "refersTo": "task-card",
+      "description": "A flat work card with an editable task title, explicit implementation kind, priority, milestone, and a native alternate move control.",
+      "html": "<article class=\"ds-task-card\" draggable=\"true\"><button type=\"button\" class=\"ds-task-title\">Add model timeout and fallback</button><div class=\"ds-task-meta\"><span class=\"ds-task-kind\">Mixed</span><span class=\"ds-task-priority\">high priority</span></div><div class=\"ds-task-milestone\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M5 4v16M5 6h13l-3 4 3 4H5\"/></svg>Grounded AI summaries</div><select class=\"ds-task-status\" aria-label=\"Status for Add model timeout and fallback\"><option>Backlog</option><option>To do</option><option>In progress</option><option>Done</option></select></article>",
+      "css": ".ds-task-card{width:244px;background:var(--white,#fff);color:var(--ink,#202e2b);border:1px solid #dee5da;border-radius:8px;padding:14px;font-family:'Segoe UI',system-ui,-apple-system,sans-serif;cursor:grab}.ds-task-card:hover{border-color:#9eb9a3}.ds-task-card.ds-dragging{opacity:.5}.ds-task-title{border:0;background:transparent;color:inherit;text-align:left;font-family:'Segoe UI',system-ui,-apple-system,sans-serif;font-weight:550;font-size:12px;line-height:1.6;padding:0;display:block;width:100%;overflow-wrap:anywhere;cursor:pointer}.ds-task-title:hover{color:var(--green,#236b54)}.ds-task-title:focus-visible,.ds-task-status:focus-visible{outline:3px solid var(--focus,#458a6c);outline-offset:3px;}.ds-task-meta{display:flex;align-items:center;justify-content:space-between;gap:5px;margin-top:11px}.ds-task-kind{font-size:10px;font-weight:600;border-radius:4px;padding:3px 7px;line-height:1.3;color:#705d84;background:#f0ecf5}.ds-task-priority{font-size:10px;font-weight:600;color:#a15c45;line-height:1.3}.ds-task-milestone{color:var(--muted,#62716b);font-size:10px;margin-top:12px;display:flex;align-items:center;gap:5px;line-height:1.5}.ds-task-milestone svg{width:12px;height:12px;flex-shrink:0}.ds-task-status{border:0;background:#f6f8f3;color:#52665a;border-radius:4px;font-family:'Segoe UI',system-ui,-apple-system,sans-serif;font-size:10px;padding:4px;width:100%;margin-top:11px;cursor:pointer}"
+    },
+    {
+      "name": "Milestone Track",
+      "kind": "custom",
+      "refersTo": "milestone-current",
+      "description": "The signature notebook pattern joins completed and current deliverables, with task counts, due dates, compact progress, and an explicit next action.",
+      "html": "<section class=\"ds-milestone-panel\" aria-label=\"Project roadmap\"><h2 class=\"ds-milestone-heading\">Project roadmap</h2><div class=\"ds-milestones\"><div class=\"ds-milestone-row\"><div class=\"ds-milestone-node ds-milestone-complete\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M5 12l4 4L19 6\"/></svg></div><div class=\"ds-milestone-info\"><h3>Foundation &amp; contracts</h3><p>4/4 tasks · Complete</p></div><div class=\"ds-milestone-tail\">Nov 15<div class=\"ds-progress\" role=\"progressbar\" aria-label=\"Foundation and contracts\" aria-valuenow=\"100\" aria-valuemin=\"0\" aria-valuemax=\"100\"><div class=\"ds-fill ds-fill-complete\"></div></div></div></div><div class=\"ds-milestone-row\"><div class=\"ds-milestone-node ds-milestone-current\">2</div><div class=\"ds-milestone-info\"><h3>Ingestion &amp; incident engine</h3><p>2/5 tasks · In progress</p></div><div class=\"ds-milestone-tail\">Nov 22<div class=\"ds-progress\" role=\"progressbar\" aria-label=\"Ingestion and incident engine\" aria-valuenow=\"40\" aria-valuemin=\"0\" aria-valuemax=\"100\"><div class=\"ds-fill ds-fill-current\"></div></div></div></div></div><div class=\"ds-next\"><span class=\"ds-next-label\">UP NEXT</span><button type=\"button\">Add incident grouping rules</button><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M5 12h14M14 7l5 5-5 5\"/></svg></div></section>",
+      "css": ".ds-milestone-panel{width:min(100%,650px);background:var(--white,#fff);border:1px solid var(--line,#e2e7e1);border-radius:var(--radius,12px);overflow:hidden;font-family:'Segoe UI',system-ui,-apple-system,sans-serif;color:var(--ink,#202e2b)}.ds-milestone-heading{margin:0;padding:21px 24px 0;font-size:16px;font-weight:650;line-height:1.3;letter-spacing:-.015em}.ds-milestones{padding:8px 24px 20px}.ds-milestone-row{display:grid;grid-template-columns:31px 1fr auto;column-gap:12px;padding:18px 0;position:relative}.ds-milestone-row:not(:last-child):before{content:\"\";position:absolute;width:1px;background:#dce5da;left:14px;top:43px;bottom:-12px}.ds-milestone-node{width:29px;height:29px;border-radius:50%;border:1px solid #ccd8cc;display:flex;align-items:center;justify-content:center;font-size:11px;position:relative;z-index:1}.ds-milestone-complete{background:#edf4ec;border-color:#d1e2d0;color:var(--green,#236b54)}.ds-milestone-current{background:var(--green,#236b54);color:var(--white,#fff);border-color:var(--green,#236b54)}.ds-milestone-node svg{width:14px;height:14px}.ds-milestone-info h3{font-size:13px;font-weight:600;line-height:1.5;margin:2px 0 4px}.ds-milestone-info p{font-size:11px;color:var(--muted,#62716b);line-height:1.65;margin:0}.ds-milestone-tail{text-align:right;padding-top:2px;font-size:11px;line-height:1.5;color:var(--muted,#62716b)}.ds-progress{width:68px;height:3px;margin-top:9px;background:#edf1e9;border-radius:6px;overflow:hidden}.ds-fill{height:100%;background:#3d8060;border-radius:6px;transition:width .2s ease}.ds-fill-complete{width:100%}.ds-fill-current{width:40%}.ds-next{border-top:1px solid var(--line,#e2e7e1);background:#fafcf8;padding:15px 24px;display:flex;gap:12px;align-items:center;font-size:12px}.ds-next-label{font-size:10px;color:var(--green,#236b54);font-weight:700;white-space:nowrap}.ds-next button{border:0;background:none;text-align:left;font-family:'Segoe UI',system-ui,-apple-system,sans-serif;font-size:12px;color:var(--ink,#202e2b);padding:0;flex:1;cursor:pointer}.ds-next button:hover{color:var(--green,#236b54)}.ds-next button:focus-visible{outline:3px solid var(--focus,#458a6c);outline-offset:3px;}.ds-next>svg{width:18px;height:18px;flex-shrink:0}@media(max-width:400px){.ds-milestones{padding:8px 20px 16px}.ds-milestone-row{grid-template-columns:29px 1fr auto;column-gap:9px}.ds-milestone-info h3{font-size:12px}.ds-milestone-info p,.ds-milestone-tail{font-size:10px}.ds-progress{width:48px}.ds-next{padding:14px 20px;gap:8px}.ds-next-label{font-size:9px}.ds-next button{font-size:11px}}@media(prefers-reduced-motion:reduce){.ds-fill{transition:none}}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Engineering Field Notebook",
+    "overview": "Sidequest uses the calm organization of a field notebook: a paper ground, a dark forest navigation rail, precise headings, and connected milestone marks. Its personality comes from useful information arranged with care. Familiar controls keep project planning, technical rationale, and the next task easy to find.\n\nThis is a builder-selected direction, documented from the implemented interface rather than a claimed user aesthetic preference. The original field notebook choice is preserved through type, palette, density, and the milestone track. Technical handbooks, map keys, research notebooks, architecture journals, print specification sheets, and engineering drawing indices informed the original comparison; field notebooks were selected with seed `221ef68bca83539a`. No external visual challenger was available.",
+    "keyCharacteristics": [
+      "Quiet paper surfaces with a stable forest rail.",
+      "Compact, legible controls and information-rich rows.",
+      "Color tied to action, selection, status, or component kind.",
+      "Connected milestones that make the next deliverable easy to scan.",
+      "Native controls, authored stroke SVG, and visible keyboard focus."
+    ],
+    "rules": [
+      {
+        "name": "The Semantic Color Rule",
+        "body": "Use accent color to convey action, selection, status, or implementation kind; keep the working canvas predominantly paper and white.",
+        "section": "colors"
+      },
+      {
+        "name": "The Small Type Rule",
+        "body": "Preserve small labels for metadata; keep task titles, fields, and actionable text visually distinct from their supporting details.",
+        "section": "typography"
+      },
+      {
+        "name": "The Reflow Rule",
+        "body": "Stack work sections and board lanes on small screens; reserve horizontal scrolling for comparisons whose columns are meaningful together.",
+        "section": "layout"
+      },
+      {
+        "name": "The Flat Workspace Rule",
+        "body": "Keep panels and task cards shadow-free; use elevation only when a temporary surface must sit above the workspace.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "**Do** preserve the paper ground, forest rail, and flat white work surfaces.",
+      "**Do** use the existing semantic pairs for Software, GPT/API, and Mixed labels.",
+      "**Do** retain the shared visible keyboard outline on every interactive control.",
+      "**Do** keep native selects, checkboxes, and dialog behavior recognizable.",
+      "**Do** stack work sections on mobile and wrap long technical content.",
+      "**Do** keep milestone progress, due dates, and the next task easy to scan."
+    ],
+    "donts": [
+      "**Don't** add ornamental shadows to resting panels or task cards.",
+      "**Don't** use accent colors as decoration without a semantic role.",
+      "**Don't** turn static category chips into implied actions.",
+      "**Don't** replace useful labels with icon-only controls or color alone.",
+      "**Don't** require external fonts or imagery to preserve the current identity.",
+      "**Don't** add motion that survives the reduced-motion preference."
+    ]
+  }
+}
